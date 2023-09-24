@@ -33,13 +33,16 @@ class music_cog(commands.Cog):
         if len(self.music_queue) > 0:
             self.is_playing = True
 
-            #get the first url
-            m_url = self.music_queue[0][0]['source']
+            # Obtenha a próxima música da fila
+            next_music = self.music_queue.pop(0)
 
-            #remove the first element as you are currently playing it
-            self.music_queue.pop(0)
+            # Obtenha a URL da próxima música
+            m_url = next_music[0]['source']
 
+            # Reproduza a próxima música
             self.vc.play(discord.FFmpegPCMAudio(m_url, **self.FFMPEG_OPTIONS), after=lambda e: self.play_next())
+
+
         else:
             self.is_playing = False
 
@@ -114,20 +117,18 @@ class music_cog(commands.Cog):
             #try to play next in the queue if it exists
             await self.play_music(ctx)
 
-
-
     @commands.command(name="queue", aliases=["q"], help="Displays the current songs in queue")
     async def queue(self, ctx):
         retval = ""
-        for i in range(0, len(self.music_queue)):
-            # display a max of 5 songs in the current queue
-            if (i > 4): break
+
+        # Exibir as próximas músicas na fila (no máximo 5)
+        for i in range(0, min(6, len(self.music_queue))):  
             retval += self.music_queue[i][0]['title'] + "\n"
 
         if retval != "":
             await ctx.send(retval)
         else:
-            await ctx.send("cabo as musga, paizao")
+            await ctx.send("Cabo as música, paizão")
 
     @commands.command(name="clear", aliases=["c", "bin"], help="Stops the music and clears the queue")
     async def clear(self, ctx):
