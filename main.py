@@ -2,10 +2,6 @@ import discord
 from discord.ext import commands
 import os
 
-from dotenv import load_dotenv
-
-load_dotenv()
-
 #import all cogs
 from help_cog import help_cog
 from music_cog import music_cog
@@ -30,9 +26,9 @@ class MyClient(discord.Client):
         if message.author.id == self.user.id:
             return
 
-        if message.content.startswith('aaa'):
-            await message.reply('bbb')
+        if message.content.startswith('Bom dia'):
+            await message.reply('BOM DIA!')
 
 #start the bot with token
-# bot.run(os.getenv("TOKEN"))
-bot.run("MTE1NDgzOTMyMjIzOTk3OTY1MQ.Gt16FU.mO7P7WQxz-loe8efDoVDmsWcXBm3HCSkwLm29Y")
+TOKEN = os.getenv("TOKEN") or ""
+bot.run(TOKEN)
