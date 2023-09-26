@@ -2,6 +2,9 @@ import discord
 from discord.ext import commands
 import os
 
+from dotenv import load_dotenv
+load_dotenv()
+
 #import all cogs
 from help_cog import help_cog
 from music_cog import music_cog

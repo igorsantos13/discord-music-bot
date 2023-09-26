@@ -13,10 +13,3 @@ class MyClient(discord.Client):
 
         if message.content.startswith('frank'):
             await message.reply('enstein')
-
-
-# intents = discord.Intents.default()
-# intents.message_content = True
-
-# client = MyClient(intents=intents)
-# client.run('MTE1NDgzOTMyMjIzOTk3OTY1MQ.Gt16FU.mO7P7WQxz-loe8efDoVDmsWcXBm3HCSkwLm29Y')
